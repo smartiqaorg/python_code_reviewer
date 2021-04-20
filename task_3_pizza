@@ -1,0 +1,127 @@
+class Pizza:
+
+    SMALL = 25
+    MEDIUM = 30
+    LARGE = 35
+
+    COOKING = 0
+    READY = 1
+
+    PEPPERONI = 'Pepperoni'
+    MARGARITA = 'Margarita'
+
+
+    def __init__(self, ingredients, size=MEDIUM):
+        self.size = size
+        self.ingredients = ingredients
+        self.state = None
+
+
+    def cook(self):
+        self.state = 0
+        print('Pizza is being cooked...')
+        self.state = 1
+        print('Pizza is ready!')
+
+
+class Pepperoni(Pizza):
+
+    def __init__(self, size):
+        ingredients = ['Salami', 'Cheese']
+        super().__init__(ingredients, size)
+
+
+class Margarita(Pizza):
+
+    def __init__(self, size):
+        ingredients = ['Tomato', 'Cheese']
+        super().__init__(ingredients, size)
+
+
+class Worker:
+
+
+    def __init__(self):
+        self.order = None
+        self.__cash = 0
+
+
+    @staticmethod
+    def greet_client(name):
+        print(f'Hello, {name}! What is your order?')
+
+
+    def get_order(self, pizza_type, pizza_size):
+
+        pizza = None
+        if pizza_type == Pizza.PEPPERONI:
+            pizza = Pepperoni(pizza_size)
+        elif pizza_type == Pizza.MARGARITA:
+            pizza = Margarita(pizza_size)
+        else:
+            print('No such pizza type!')
+
+        self.order = pizza
+        print(f'Your order is accepted')
+
+
+    def get_money(self, money):
+        self.__cash =+ money
+        print(f'Got {money}$')
+
+    def process_order(self):
+        self.order.cook()
+        return self.order
+
+
+class Client:
+
+    default_name = 'No name'
+
+    def __init__(self, money, name=default_name):
+        self.name = name
+        self.__money = money
+        self.pizza = None
+
+    @staticmethod
+    def choose_pepperoni_pizza():
+        return Pizza.PEPPERONI
+
+    @staticmethod
+    def choose_margarita_pizza():
+        return Pizza.MARGARITA
+
+    @staticmethod
+    def choose_small_size():
+        return Pizza.SMALL
+
+    @staticmethod
+    def choose_medium_size():
+        return Pizza.MEDIUM
+
+    @staticmethod
+    def choose_large_size():
+        return Pizza.LARGE
+
+    def pay_money(self, price):
+        self.__money -= price
+
+    def get_pizza(self, pizza):
+        self.pizza = pizza
+
+
+
+# Tests
+worker = Worker()
+ivan = Client(30, 'Ivan')
+
+Worker.greet_client(ivan.name)
+
+pizza_type = Client.choose_pepperoni_pizza()
+pizza_size = Client.choose_large_size()
+
+worker.get_order(pizza_type, pizza_size)
+ivan.pay_money(10)
+worker.get_money(10)
+pizza = worker.process_order()
+ivan.get_pizza(pizza)
