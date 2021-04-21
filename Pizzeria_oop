@@ -1,63 +1,94 @@
 class Pizza:
-    pizza_size = {0: "SMALL", 1: "MEDIUM", 2: "LARGE"}
-    pizza_type = {"PEPPERONI": "Pepperoni", "MARGARITA": "Margarita"}
-    ready = {0: "COOKING", 1: "READY"}
+
+    SMALL = 25
+    MEDIUM = 30
+    LARGE = 40
+    PEPPERONI = "Pepperoni type"
+    MARGARITA = "Margarita type"
+    COOKING = 0
+    READY = 1
+
     def __init__(self, ingredients, size):
         self.ingredients = ingredients
         self.size = size
-        self.ready = Pizza.ready[0]
-        
-    def cook(self): setattr(self, 'ready', Pizza.ready[1])
+        self.ready = Pizza.COOKING
+
+    def cook(self):
+        print('Pizza is being cooked...')
+        self.ready = Pizza.READY
+        print('Pizza is ready!')
+
 
 class Pepperoni(Pizza):
-    ings = ['Salami', 'Cheese']
+
+    pepperoni_ings = ['Salami', 'Cheese']
+
     def __init__(self, size):
-        super().__init__(Pepperoni.ings, size)
+        super().__init__(Pepperoni.pepperoni_ings, size)
+
 
 class Margarita(Pizza):
-    ings = ['Tomato', 'Cheese']
+
+    margarita_ings = ['Tomato', 'Cheese']
+
     def __init__(self, size):
-        super().__init__(Margarita.ings, size)
+        super().__init__(Margarita.margarita_ings, size)
+
 
 class Worker:
+
     def __init__(self):
         self.order = None
-        self._cash = 0
+        self.__cash = 0
 
     @staticmethod
-    def greet_client(name): print(f"Welcome, {name}!")
+    def greet_client(name):
+        print(f"Welcome, {name}!")
 
     def get_order(self, pizza_type, pizza_size):
-        if pizza_type == 'Pepperoni':
+        if pizza_type == Pizza.PEPPERONI:
             self.order = Pepperoni(pizza_size)
         elif pizza_type == 'Margarita':
             self. order = Margarita(pizza_size)
 
-    def get_money(self, money): self._cash += money
+    def get_money(self, money):
+        self.__cash += money
 
     def process_order(self):
         self.order.cook()
         return self.order
 
-class Client:
-    client_name = 'Alex'
 
-    def __init__(self, money, name=client_name,):
-        self._money = money
+class Client:
+    default_name = 'Alex'
+
+    def __init__(self, money, name=default_name):
+        self.__money = money
         self.name = name
         self.pizza = None
 
     @staticmethod
-    def choose_margarita_pizza(): return Pizza.pizza_type["MARGARITA"]
-    @staticmethod
-    def choose_pepperoni_pizza(): return Pizza.pizza_type["PEPPERONI"]
-    @staticmethod
-    def choose_small_size(): return Pizza.pizza_size[0]
-    @staticmethod
-    def choose_medium_size(): return Pizza.pizza_size[1]
-    @staticmethod
-    def choose_large_size(): return Pizza.pizza_size[2]
+    def choose_margarita_pizza():
+        return Pizza.MARGARITA
 
-    def pay_money(self, money): self._money -= money
+    @staticmethod
+    def choose_pepperoni_pizza():
+        return Pizza.PEPPERONI
 
-    def get_pizza(self, pizza): self.pizza = pizza
+    @staticmethod
+    def choose_small_size():
+        return Pizza.SMALL
+
+    @staticmethod
+    def choose_medium_size():
+        return Pizza.MEDIUM
+
+    @staticmethod
+    def choose_large_size():
+        return Pizza.LARGE
+
+    def pay_money(self, money):
+        self.__money -= money
+
+    def get_pizza(self, pizza):
+        self.pizza = pizza
