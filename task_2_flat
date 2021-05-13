@@ -5,24 +5,24 @@ class Flat:
         self.bedroom = bedroom
         self.bathroom = bathroom
 
-    #def print_rooms(self):
-    #    print (f'{self.kitchen, self.bedroom, self.bedroom}')
+    def print_rooms(self):
+        print(f'{self.kitchen, self.bedroom, self.bedroom}')
 
-    #def print_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
-    #    size = self._calculate_flat_size(kitchen_size, bedroom_size, bathroom_size)
-    #    print(f'Flat {size}sq.m.')
+    def print_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
+        flat_size = self._calculate_flat_size(kitchen_size, bedroom_size, bathroom_size)
+        print(f'Flat size: {flat_size}')
 
-    #def print_kitchen_size(self, size):
-    #    print(f'{self.kitchen} {size}sq.m.')
+    def print_kitchen_size(self, size):
+        print(f'Kitchen size: {self.kitchen.get_size()}')
 
-    #def print_bedroom_size(self, size):
-    #    print(f'{self.bedroom} {size}sq.m.')
+    def print_bedroom_size(self, size):
+        print(f'Bedroom size: {self.bedroom.get_size()}')
 
-    #def print_bathroom_size(self, size):
-    #    print(f'{self.bathroom} {size}sq.m.')
+    def print_bathroom_size(self, size):
+        print(f'Bathroom size: {self.bathroom.get_size()}')
 
-    #def _calculate_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
-    #    return f'{kitchen_size + bathroom_size + bedroom_size}'
+    def _calculate_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
+        return f'{self.kitchen.get_size() + self.bathroom.get_size() + self.bedroom.get_size()}'
 
 #class Room:
 
@@ -38,29 +38,38 @@ class Flat:
     #    print(f'{self.name} is {user_size}(sq.m.)')
 
 
-class Kitchen(Room):
+class Kitchen:
     
     TITLE = 'Kitchen'
 
     def __init__(self, size):
         self.__size = size
         self.__purpose = 'To eat'
+        
+    def get_size(self):
+        return self.__size
 
-class Bedroom(Room):
+class Bedroom:
 
     TITLE = 'Bedroom'
 
     def __init__(self, size):
         self.__size = size
         self.__purpose = 'To sleep'
+        
+    def get_size(self):
+        return self.__size
 
-class Bathroom(Room):
+class Bathroom:
     
     TITLE = 'Bathroom'
 
     def __init__(self, size):
         self.__size = size
         self.__purpose = 'To wash'
+        
+    def get_size(self):
+        return self.__size
 
 #class BigBedroom(Room):
 
@@ -72,11 +81,15 @@ class Bathroom(Room):
     #def __str__(self):
     #    return f'{self.name} Гостевая спальня'
 
+if __name__ == '__main__':
 
-my_kitchen = Kitchen(13)
-
-my_bedroom = Bedroom(18)
-
-my_bathroom = Bathroom(4)
-
-my_flat = Flat(my_kitchen, my_bedroom, my_bathroom)
+    my_kitchen = Kitchen(13)
+    my_bedroom = Bedroom(18)
+    my_bathroom = Bathroom(4)
+    my_flat = Flat(my_kitchen, my_bedroom, my_bathroom)
+    
+    my_flat.print_rooms()
+    my_flat.print_flat_size(my_kitchen, my_bedroom, my_bathroom)
+    my_flat.print_kitchen_size(my_kitchen)
+    my_flat.print_bedroom_size(my_bedroom)
+    my_flat.print_bathroom_size(my_bathroom)
