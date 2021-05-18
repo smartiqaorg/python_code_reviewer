@@ -6,10 +6,10 @@ class Flat:
         self.bathroom = bathroom
 
     def print_rooms(self):
-        print(f'{self.kitchen, self.bedroom, self.bedroom}')
+        print(f'{Kitchen.TITLE, Bedroom.TITLE, Bathroom.TITLE}')
 
-    def print_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
-        flat_size = self._calculate_flat_size(kitchen_size, bedroom_size, bathroom_size)
+    def print_flat_size(self):
+        flat_size = self._calculate_flat_size()
         print(f'Flat size: {flat_size}')
 
     def print_kitchen_size(self, size):
@@ -21,7 +21,7 @@ class Flat:
     def print_bathroom_size(self, size):
         print(f'Bathroom size: {self.bathroom.get_size()}')
 
-    def _calculate_flat_size(self, kitchen_size, bedroom_size, bathroom_size):
+    def _calculate_flat_size(self):
         return f'{self.kitchen.get_size() + self.bathroom.get_size() + self.bedroom.get_size()}'
 
 #class Room:
@@ -89,7 +89,7 @@ if __name__ == '__main__':
     my_flat = Flat(my_kitchen, my_bedroom, my_bathroom)
     
     my_flat.print_rooms()
-    my_flat.print_flat_size(my_kitchen, my_bedroom, my_bathroom)
+    my_flat.print_flat_size()
     my_flat.print_kitchen_size(my_kitchen)
     my_flat.print_bedroom_size(my_bedroom)
     my_flat.print_bathroom_size(my_bathroom)
