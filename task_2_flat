@@ -24,52 +24,35 @@ class Flat:
     def _calculate_flat_size(self):
         return f'{self.kitchen.get_size() + self.bathroom.get_size() + self.bedroom.get_size()}'
 
-#class Room:
+class Room:
 
-    #def __init__(self, name, purpose):
-    #    self.name = name
-    #    self.purpose = purpose
+    def __init__(self, size):
+        self.__size = size
 
-    #def __str__(self):
-    #    return f'{self.name} {self.purpose}'
-
-    #def get_size(self):
-    #    user_size = input(f'Enter size of {self.name} ')
-    #    print(f'{self.name} is {user_size}(sq.m.)')
+    def get_size(self):
+        return self.__size
 
 
-class Kitchen:
-    
+class Kitchen(Room):
     TITLE = 'Kitchen'
 
     def __init__(self, size):
-        self.__size = size
+        super().__init__(size)
         self.__purpose = 'To eat'
-        
-    def get_size(self):
-        return self.__size
 
-class Bedroom:
-
+class Bedroom(Room):
     TITLE = 'Bedroom'
 
     def __init__(self, size):
-        self.__size = size
+        super().__init__(size)
         self.__purpose = 'To sleep'
-        
-    def get_size(self):
-        return self.__size
 
-class Bathroom:
-    
+class Bathroom(Room):
     TITLE = 'Bathroom'
 
     def __init__(self, size):
-        self.__size = size
+        super().__init__(size)
         self.__purpose = 'To wash'
-        
-    def get_size(self):
-        return self.__size
 
 #class BigBedroom(Room):
 
