@@ -1,0 +1,102 @@
+class Flat:
+
+    def __init__(self, kitchen, bedroom, bathroom, bigbedroom, guestbedroom):
+        self.kitchen = kitchen
+        self.bedroom = bedroom
+        self.bathroom = bathroom
+        self.bigbedroom = bigbedroom
+        self.guestbedroom = guestbedroom
+
+    def print_rooms(self):
+        print(f'{Kitchen.TITLE, Bedroom.TITLE, Bathroom.TITLE, BigBedroom.TITLE, GuestBedroom.TITLE}')
+
+    def print_flat_size(self):
+        flat_size = self._calculate_flat_size()
+        print(f'Flat size: {flat_size}')
+
+    def print_kitchen_size(self, size):
+        print(f'Kitchen size: {self.kitchen.get_size()}')
+
+    def print_bedroom_size(self, size):
+        print(f'Bedroom size: {self.bedroom.get_size()}')
+
+    def print_bathroom_size(self, size):
+        print(f'Bathroom size: {self.bathroom.get_size()}')
+
+    def print_bigbedroom_size(self, size):
+        print(f'Bigbedroom size: {self.bigbedroom.get_size()}')
+
+    def print_guestbedroom_size(self, size):
+        print(f'Guestbedroom size: {self.guestbedroom.get_size()}')
+
+    def _calculate_flat_size(self):
+        return f'{self.kitchen.get_size() + self.bathroom.get_size() + self.bedroom.get_size() + self.bigbedroom.get_size() + self.guestbedroom.get_size()}'
+
+
+class Room:
+
+    def __init__(self, size):
+        self.__size = size
+
+    def get_size(self):
+        return self.__size
+
+
+class Kitchen(Room):
+    TITLE = 'Kitchen'
+
+    def __init__(self, size):
+        super().__init__(size)
+        self.__purpose = 'To eat'
+
+class Bedroom(Room):
+    TITLE = 'Bedroom'
+
+    def __init__(self, size):
+        super().__init__(size)
+        self.__purpose = 'To sleep'
+
+class Bathroom(Room):
+    TITLE = 'Bathroom'
+
+    def __init__(self, size):
+        super().__init__(size)
+        self.__purpose = 'To wash'
+
+
+class BigBedroom(Room):
+    TITLE = 'BigBedroom'
+
+    def __init__(self, size):
+        super().__init__(size)
+        self.__purpose = 'Спальня с двуспальной кроватью'
+
+class GuestBedroom(Room):
+    TITLE = 'GuestBedroom'
+
+    def __init__(self, size):
+        super().__init__(size)
+        self.__purpose = 'Гостевая спальня'
+
+
+if __name__ == '__main__':
+
+    my_kitchen = Kitchen(13)
+
+    my_bedroom = Bedroom(18)
+
+    my_bathroom = Bathroom(4)
+
+    my_bigbedroom = BigBedroom(20)
+
+    my_guestbedroom = GuestBedroom(21)
+
+    my_flat = Flat(my_kitchen, my_bedroom, my_bathroom, my_guestbedroom, my_bigbedroom)
+
+    my_flat.print_rooms()
+    my_flat.print_flat_size()
+    my_flat.print_kitchen_size(my_kitchen)
+    my_flat.print_bedroom_size(my_bedroom)
+    my_flat.print_bathroom_size(my_bathroom)
+    my_flat.print_bigbedroom_size(my_bigbedroom)
+    my_flat.print_guestbedroom_size(my_guestbedroom)
